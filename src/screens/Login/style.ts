@@ -16,3 +16,8 @@ export const LoginFooterTextUnderlined = styled.Text`
   font-family: Sora-Regular;
   text-decoration: underline;
 `;
+
+export const Container = styled.View`
+  flex: 1;
+  background-color: #ffffff;
+`;

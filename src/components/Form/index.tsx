@@ -2,8 +2,12 @@ import FeatherIcons from '@expo/vector-icons/Feather';
 import React, {ReactNode, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {FlatList, KeyboardTypeOptions} from 'react-native';
+import {Checkbox} from 'react-native-paper';
 import {
   FormButton,
+  FormCheckboxButton,
+  FormCheckboxText,
+  FormCheckboxView,
   FormContainerView,
   FormInput,
   FormInputView,
@@ -26,6 +30,7 @@ interface FormInterface {
   inputs: InputsInterface[];
   footer?: ReactNode;
   onSubmit: (event: any) => void;
+  privacyPolicyEnabled?: boolean;
 }
 export default function Form({
   title,
@@ -33,8 +38,10 @@ export default function Form({
   inputs,
   footer,
   onSubmit,
+  privacyPolicyEnabled,
 }: FormInterface): ReactNode {
   const [showPassword, setShowPassword] = useState(true);
+  const [checked, setChecked] = useState(false);
   const {register, control, handleSubmit} = useForm({
     mode: 'onSubmit',
   });
@@ -44,7 +51,7 @@ export default function Form({
   };
 
   return (
-    <FormContainerView>
+    <FormContainerView showsVerticalScrollIndicator={false}>
       <FormTitle>{title}</FormTitle>
 
       <FlatList
@@ -54,7 +61,7 @@ export default function Form({
               <FormLabel>{item.label}</FormLabel>
 
               <Controller
-                name={item.label} // Use a unique name for each input
+                name={item.label}
                 control={control}
                 rules={{required: true}}
                 render={({field}) => (
@@ -87,7 +94,24 @@ export default function Form({
         data={inputs}
       />
 
-      <FormButton onPress={handleSubmit(handleFormSubmit)}>
+      {privacyPolicyEnabled && (
+        <FormCheckboxView>
+          <FormCheckboxButton onPress={() => setChecked(!checked)}>
+            <Checkbox
+              status={checked ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+            />
+            <FormCheckboxText>
+              I am over 18 years of age and I have read and agree to the Terms
+              of Service and Privacy policy.
+            </FormCheckboxText>
+          </FormCheckboxButton>
+        </FormCheckboxView>
+      )}
+
+      <FormButton disabled={!checked} onPress={handleSubmit(handleFormSubmit)}>
         <FormTitleButton>{buttonTitle}</FormTitleButton>
       </FormButton>
 

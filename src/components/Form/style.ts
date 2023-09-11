@@ -4,10 +4,13 @@ import {width} from '../../utils/Dimensions';
 
 const formWidth = RFValue(300);
 
-export const FormContainerView = styled.View`
+export const FormContainerView = styled.ScrollView.attrs(({}) => ({
+  contentContainerStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}))`
   margin: ${RFValue(20)}px;
-  justify-content: center;
-  align-items: center;
 `;
 export const FormTitle = styled.Text`
   color: #000000;
@@ -15,8 +18,25 @@ export const FormTitle = styled.Text`
   font-weight: 600;
   font-size: ${RFValue(18)}px;
 `;
+
 export const FormInputView = styled.View`
   margin-vertical: ${RFValue(15)}px;
+`;
+
+export const FormCheckboxView = styled.View`
+  margin-horizontal: ${RFValue(25)}px;
+`;
+
+export const FormCheckboxButton = styled.TouchableOpacity`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const FormCheckboxText = styled.Text`
+  font-family: Sora-Regular;
+  margin-vertical: ${RFValue(15)}px;
+  font-size: ${RFValue(9)}px;
 `;
 
 export const FormLabel = styled.Text`
@@ -38,6 +58,7 @@ export const FormInput = styled.TextInput`
 `;
 
 export const FormButton = styled.TouchableOpacity`
+  opacity: ${props => (props.disabled ? 0.5 : 1)};
   width: ${width}px;
   align-items: center;
   justify-content: center;

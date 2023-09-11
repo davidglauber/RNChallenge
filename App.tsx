@@ -1,9 +1,11 @@
 import React from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 
+import {NavigationContainer} from '@react-navigation/native';
 import {useFonts} from 'expo-font';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Login from './src/screens/Login';
+import {PaperProvider} from 'react-native-paper';
+import Routes from './src/routes';
 
 function App(): JSX.Element {
   useFonts({
@@ -25,12 +27,16 @@ function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode ? Colors.darker : '#ffffff',
   };
 
   return (
     <>
-      <Login />
+      <NavigationContainer>
+        <PaperProvider>
+          <Routes />
+        </PaperProvider>
+      </NavigationContainer>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
