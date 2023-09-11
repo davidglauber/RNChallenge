@@ -21,12 +21,14 @@ function FooterLogin() {
 }
 
 export default function Login() {
+  const {navigate}: any = useNavigation();
+
   return (
     <Container>
       <Form
         title="Login"
         buttonTitle="Login"
-        onSubmit={result => console.log('result: ' + JSON.stringify(result))}
+        onSubmit={() => navigate('MyTabs')}
         inputs={[
           {
             label: 'Email',

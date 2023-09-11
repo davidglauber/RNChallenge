@@ -111,7 +111,9 @@ export default function Form({
         </FormCheckboxView>
       )}
 
-      <FormButton disabled={!checked} onPress={handleSubmit(handleFormSubmit)}>
+      <FormButton
+        disabled={privacyPolicyEnabled ? !checked : false}
+        onPress={handleSubmit(handleFormSubmit)}>
         <FormTitleButton>{buttonTitle}</FormTitleButton>
       </FormButton>
 
