@@ -8,7 +8,7 @@ import {
 
 function FooterLogin() {
   return (
-    <LoginFooterButton>
+    <LoginFooterButton onPress={() => console.log('navigate to...')}>
       <LoginFooterText>Don’t have an account? </LoginFooterText>
       <LoginFooterTextUnderlined>Sign up</LoginFooterTextUnderlined>
       <LoginFooterText> here</LoginFooterText>
@@ -21,7 +21,7 @@ export default function Login() {
     <Form
       title="Login"
       buttonTitle="Login"
-      footer={<FooterLogin />}
+      onSubmit={result => console.log('result: ' + JSON.stringify(result))}
       inputs={[
         {
           label: 'Email',
@@ -35,6 +35,7 @@ export default function Login() {
           isPassword: true,
         },
       ]}
+      footer={<FooterLogin />}
     />
   );
 }

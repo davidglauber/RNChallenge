@@ -1,5 +1,6 @@
 import FeatherIcons from '@expo/vector-icons/Feather';
 import React, {ReactNode, useState} from 'react';
+import {Controller, useForm} from 'react-hook-form';
 import {FlatList, KeyboardTypeOptions} from 'react-native';
 import {
   FormButton,
@@ -24,14 +25,23 @@ interface FormInterface {
   buttonTitle: string;
   inputs: InputsInterface[];
   footer?: ReactNode;
+  onSubmit: (event: any) => void;
 }
 export default function Form({
   title,
   buttonTitle,
   inputs,
   footer,
+  onSubmit,
 }: FormInterface): ReactNode {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
+  const {register, control, handleSubmit} = useForm({
+    mode: 'onSubmit',
+  });
+
+  const handleFormSubmit = (formData: any) => {
+    onSubmit(formData);
+  };
 
   return (
     <FormContainerView>
@@ -42,12 +52,23 @@ export default function Form({
           return (
             <FormInputView>
               <FormLabel>{item.label}</FormLabel>
-              <FormInput
-                placeholder={item.placeholder}
-                keyboardType={item.type}
-                secureTextEntry={showPassword}
-                autoCapitalize="none"
-                placeholderTextColor="#CFCFCF"
+
+              <Controller
+                name={item.label} // Use a unique name for each input
+                control={control}
+                rules={{required: true}}
+                render={({field}) => (
+                  <FormInput
+                    {...register(item.label)}
+                    value={field.value}
+                    onChangeText={field.onChange}
+                    placeholder={item.placeholder}
+                    keyboardType={item.type}
+                    secureTextEntry={showPassword}
+                    autoCapitalize="none"
+                    placeholderTextColor="#CFCFCF"
+                  />
+                )}
               />
 
               {item.isPassword && (
@@ -66,7 +87,7 @@ export default function Form({
         data={inputs}
       />
 
-      <FormButton>
+      <FormButton onPress={handleSubmit(handleFormSubmit)}>
         <FormTitleButton>{buttonTitle}</FormTitleButton>
       </FormButton>
 
