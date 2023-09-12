@@ -9,10 +9,17 @@ import {
   FundChartImage,
   FundChartPeriodText,
   FundChartPeriodView,
+  FundChartPriceText,
   FundChartPriceTextHigh,
+  FundChartPriceTextInfo,
   FundChartPriceTextLow,
   FundChartView,
   FundHeader,
+  FundStatsDetailsView,
+  FundStatsInformationView,
+  FundStatsTitle,
+  FundStatsView,
+  FundsStatsColumn,
 } from './style';
 
 const chartPeriod = [
@@ -49,6 +56,16 @@ interface SummaryInterface {
   lowerPrice: number;
   higherPrice: number;
   chart: ReactNode;
+}
+
+interface StatsInterface {
+  title: string;
+  aum: string;
+  vintageRange: string;
+  closePrice: number;
+  openPrice: number;
+  ter: number;
+  issueDate: string;
 }
 
 function ChartFund({
@@ -118,6 +135,59 @@ function SummaryFund({
     </View>
   );
 }
+
+function StatsFund({
+  title,
+  aum,
+  closePrice,
+  issueDate,
+  openPrice,
+  ter,
+  vintageRange,
+}: StatsInterface) {
+  return (
+    <FundStatsView>
+      <FundStatsTitle>{title}</FundStatsTitle>
+
+      <FundStatsDetailsView>
+        <FundsStatsColumn>
+          <FundStatsInformationView>
+            <FundChartPriceText>AUM ⓘ</FundChartPriceText>
+            <FundChartPriceTextInfo>${aum}m</FundChartPriceTextInfo>
+          </FundStatsInformationView>
+
+          <FundStatsInformationView>
+            <FundChartPriceText>Vintage Range ⓘ</FundChartPriceText>
+            <FundChartPriceTextInfo>{vintageRange}</FundChartPriceTextInfo>
+          </FundStatsInformationView>
+
+          <FundStatsInformationView>
+            <FundChartPriceText>Price at Close ⓘ</FundChartPriceText>
+            <FundChartPriceTextInfo>{closePrice}%</FundChartPriceTextInfo>
+          </FundStatsInformationView>
+        </FundsStatsColumn>
+
+        <FundsStatsColumn>
+          <FundStatsInformationView>
+            <FundChartPriceText>Issue Date ⓘ</FundChartPriceText>
+            <FundChartPriceTextInfo>{issueDate}</FundChartPriceTextInfo>
+          </FundStatsInformationView>
+
+          <FundStatsInformationView>
+            <FundChartPriceText>TER ⓘ</FundChartPriceText>
+            <FundChartPriceTextInfo>{ter}%</FundChartPriceTextInfo>
+          </FundStatsInformationView>
+
+          <FundStatsInformationView>
+            <FundChartPriceText>Price at Open ⓘ</FundChartPriceText>
+            <FundChartPriceTextInfo>{openPrice}%</FundChartPriceTextInfo>
+          </FundStatsInformationView>
+        </FundsStatsColumn>
+      </FundStatsDetailsView>
+    </FundStatsView>
+  );
+}
+
 export default function Fund() {
   return (
     <Container>
@@ -132,6 +202,16 @@ export default function Fund() {
           />
         }
         year={2023}
+      />
+
+      <StatsFund
+        title="Info & Stats"
+        issueDate="18/04/2023"
+        ter={0.15}
+        vintageRange="2019 - 2023"
+        openPrice={17.74}
+        closePrice={17.68}
+        aum="430.88"
       />
     </Container>
   );
