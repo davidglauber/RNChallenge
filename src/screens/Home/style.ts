@@ -50,7 +50,7 @@ export const HomeInformationCardList = styled(FlatList)`
   margin-horizontal: ${RFValue(20)}px;
 `;
 
-export const BannerContainer = styled.View`
+export const BannerContainer = styled.TouchableOpacity`
   flex-direction: row;
   width: ${RFValue(295)}px;
   margin: ${RFValue(20)}px;
