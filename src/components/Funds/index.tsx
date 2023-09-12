@@ -1,6 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {ReactNode} from 'react';
 import {FlatList} from 'react-native';
+import {calculateAppreciation} from '../../utils/CalculateAppreciation';
+import {useDispatch} from 'react-redux';
 import {
   FundInfoView,
   FundPriceText,
@@ -10,15 +12,26 @@ import {
   FundsContainer,
   FundsTitle,
 } from './styles';
-import {calculateAppreciation} from '../../utils/CalculateAppreciation';
+import {updateHeaderTitle} from '../../redux/reducers/dinamicHeaderReducer';
 
 interface FundDetails {
   icon: ReactNode;
   chart: ReactNode;
   title: string;
-  price: string;
-  profitOrLoss: number;
   category: 'Solar' | 'Wind' | 'Natural';
+  stockPrice: number;
+  year: number;
+  appreciation: number;
+  lowerPrice: number;
+  higherPrice: number;
+  chartFull: ReactNode;
+  titleFund: string;
+  aum: string;
+  vintageRange: string;
+  closePrice: number;
+  openPrice: number;
+  ter: number;
+  issueDate: string;
 }
 interface FundsInterface {
   title: string;
@@ -27,6 +40,7 @@ interface FundsInterface {
 
 export default function Funds({title, funds}: FundsInterface) {
   const {navigate}: any = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <FundsContainer>
@@ -37,17 +51,19 @@ export default function Funds({title, funds}: FundsInterface) {
         showsHorizontalScrollIndicator={false}
         renderItem={({item}) => {
           return (
-            <FundsBoxButton onPress={() => navigate('Fund', {fund: item})}>
+            <FundsBoxButton
+              onPress={() => [
+                dispatch(updateHeaderTitle(item.title)),
+                navigate('Fund', {fund: item}),
+              ]}>
               {item.icon}
-
               <FundTitle>{item.title}</FundTitle>
-
               {item.chart}
 
               <FundInfoView>
-                <FundPriceText>${item.price}</FundPriceText>
+                <FundPriceText>${item.stockPrice}</FundPriceText>
                 <FundPriceVariationView>
-                  {calculateAppreciation(item.profitOrLoss)}
+                  {calculateAppreciation(item.appreciation)}
                 </FundPriceVariationView>
               </FundInfoView>
             </FundsBoxButton>

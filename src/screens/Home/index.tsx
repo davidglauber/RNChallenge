@@ -27,6 +27,7 @@ import {
   InformationCardContainer,
   InformationCardTitle,
 } from './style';
+import {FundChartImage} from '../Fund/style';
 
 const mockedArrayInformationCard = [
   {
@@ -129,37 +130,82 @@ export default function Home() {
             icon: <FeatherIcons name="wind" size={16} color="#4A88D0" />,
             category: 'Wind',
             title: 'Wind Fund',
+            titleFund: 'Info & Stats',
+            issueDate: '18/04/2023',
+            vintageRange: '2019 - 2023',
+            aum: '430.88',
+            appreciation: 10.35,
+            higherPrice: 15.5,
+            lowerPrice: 9.05,
+            stockPrice: 144.45,
+            ter: 0.15,
+            openPrice: 17.74,
+            closePrice: 17.68,
+            year: 2023,
+            chartFull: (
+              <FundChartImage
+                source={require('../../assets/images/chartFund.png')}
+              />
+            ),
             chart: (
               <HomeChartImage
                 source={require('../../assets/images/chartWind.png')}
               />
             ),
-            price: '1032.23',
-            profitOrLoss: 3.51,
           },
           {
             icon: <FeatherIcons name="sun" size={16} color="#F0A719" />,
             category: 'Solar',
             title: 'Solar Fund',
+            titleFund: 'Info & Stats',
+            issueDate: '22/06/2023',
+            vintageRange: '2018 - 2023',
+            aum: '422.88',
+            appreciation: 0.35,
+            higherPrice: 19.5,
+            lowerPrice: 3.05,
+            stockPrice: 16.45,
+            ter: 0.15,
+            openPrice: 17.74,
+            closePrice: 17.68,
+            year: 2023,
+            chartFull: (
+              <FundChartImage
+                source={require('../../assets/images/chartFund.png')}
+              />
+            ),
             chart: (
               <HomeChartImage
                 source={require('../../assets/images/chartSolar.png')}
               />
             ),
-            price: '986.61',
-            profitOrLoss: 0.13,
           },
           {
             icon: <FeatherIcons name="feather" size={16} color="#0FDF8F" />,
             category: 'Natural',
             title: 'Natural Fund',
+            titleFund: 'Info & Stats',
+            issueDate: '18/04/2023',
+            vintageRange: '2019 - 2023',
+            appreciation: 10.35,
+            higherPrice: 15.5,
+            lowerPrice: 9.05,
+            stockPrice: 14.45,
+            ter: 0.15,
+            aum: '430.88',
+            openPrice: 17.74,
+            closePrice: 17.68,
+            year: 2023,
+            chartFull: (
+              <FundChartImage
+                source={require('../../assets/images/chartFund.png')}
+              />
+            ),
             chart: (
               <HomeChartImage
                 source={require('../../assets/images/chartWind.png')}
               />
             ),
-            price: '1122.95',
-            profitOrLoss: 2.15,
           },
         ]}
       />

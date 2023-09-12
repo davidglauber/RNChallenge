@@ -6,6 +6,8 @@ import {useFonts} from 'expo-font';
 import {PaperProvider} from 'react-native-paper';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Routes from './src/routes';
+import {Provider} from 'react-redux';
+import {store} from './src/redux/store/store';
 
 function App(): JSX.Element {
   useFonts({
@@ -31,7 +33,7 @@ function App(): JSX.Element {
   };
 
   return (
-    <>
+    <Provider store={store}>
       <NavigationContainer>
         <PaperProvider>
           <Routes />
@@ -41,7 +43,7 @@ function App(): JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-    </>
+    </Provider>
   );
 }
 

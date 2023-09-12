@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import FeatherIcons from '@expo/vector-icons/Feather';
+import {useRoute} from '@react-navigation/native';
 import React, {ReactNode, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -11,7 +12,6 @@ import {
   FooterFundText,
   FooterFundView,
   FundAppreciationView,
-  FundChartImage,
   FundChartPeriodText,
   FundChartPeriodView,
   FundChartPriceText,
@@ -289,29 +289,28 @@ function FundSummary({
 }
 
 export default function Fund() {
+  const {params}: any = useRoute();
+  const fundParam = params?.fund;
+
   return (
     <Container showsVerticalScrollIndicator={false}>
       <DashboardFund
-        appreciation={10.35}
-        higherPrice={15.5}
-        lowerPrice={9.05}
-        stockPrice={14.45}
-        chart={
-          <FundChartImage
-            source={require('../../assets/images/chartFund.png')}
-          />
-        }
-        year={2023}
+        appreciation={fundParam.appreciation}
+        higherPrice={fundParam.higherPrice}
+        lowerPrice={fundParam.lowerPrice}
+        stockPrice={fundParam.stockPrice}
+        chart={fundParam.chartFull}
+        year={fundParam.year}
       />
 
       <StatsFund
-        title="Info & Stats"
-        issueDate="18/04/2023"
-        ter={0.15}
-        vintageRange="2019 - 2023"
-        openPrice={17.74}
-        closePrice={17.68}
-        aum="430.88"
+        title={fundParam.titleFund}
+        issueDate={fundParam.issueDate}
+        ter={fundParam.ter}
+        vintageRange={fundParam.vintageRange}
+        openPrice={fundParam.openPrice}
+        closePrice={fundParam.closePrice}
+        aum={fundParam.aum}
       />
 
       <FundSummary
@@ -320,7 +319,7 @@ export default function Fund() {
         lastPurchase="28d ago"
         price="328.14"
         warningMessage="You’ve previously retired 28 credits of this asset"
-        appreciation={8.41}
+        appreciation={fundParam.appreciation}
       />
     </Container>
   );

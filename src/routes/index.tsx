@@ -3,6 +3,7 @@ import FeatherIcons from '@expo/vector-icons/Feather';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+import {useSelector} from 'react-redux';
 
 import Home from '../screens/Home';
 import Login from '../screens/Login';
@@ -50,6 +51,7 @@ function MyTabs() {
               color={focused ? '#770FDF' : 'black'}
             />
           ),
+          headerShown: true,
         }}
       />
       <Tab.Screen
@@ -63,6 +65,7 @@ function MyTabs() {
               color={focused ? '#770FDF' : 'black'}
             />
           ),
+          headerShown: true,
         }}
       />
     </Tab.Navigator>
@@ -70,11 +73,21 @@ function MyTabs() {
 }
 
 export default function Routes() {
+  const headerTitleRedux = useSelector(
+    (state: any) => state.dinamicHeader?.headerTitle,
+  );
+
+  const stockAbbreviation =
+    headerTitleRedux
+      .split(' ')
+      .map((word: string) => word.charAt(0).toUpperCase())
+      .join('') + headerTitleRedux.slice(-2).toUpperCase();
+
   return (
     <Stack.Navigator
       screenOptions={{
         gestureDirection: 'horizontal',
-        headerTitleStyle: {fontFamily: 'Sora-Regular'},
+        headerTitleStyle: {fontFamily: 'Sora-Bold'},
       }}>
       <Stack.Screen
         name="Login"
@@ -95,7 +108,7 @@ export default function Routes() {
         name="Fund"
         component={Fund}
         options={{
-          headerTitle: 'Generic Fund',
+          headerTitle: `${headerTitleRedux} (${stockAbbreviation})`,
         }}
       />
 
