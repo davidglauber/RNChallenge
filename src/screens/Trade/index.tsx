@@ -1,10 +1,6 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import {Container} from '../Login/style';
 
 export default function Trade() {
-  return (
-    <View>
-      <Text>Trade</Text>
-    </View>
-  );
+  return <Container />;
 }
