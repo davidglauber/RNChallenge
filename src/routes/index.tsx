@@ -77,11 +77,17 @@ export default function Routes() {
     (state: any) => state.dinamicHeader?.headerTitle,
   );
 
+  const stockAbbreviation =
+    headerTitleRedux
+      .split(' ')
+      .map((word: string) => word.charAt(0).toUpperCase())
+      .join('') + headerTitleRedux.slice(-2).toUpperCase();
+
   return (
     <Stack.Navigator
       screenOptions={{
         gestureDirection: 'horizontal',
-        headerTitleStyle: {fontFamily: 'Sora-Regular'},
+        headerTitleStyle: {fontFamily: 'Sora-Bold'},
       }}>
       <Stack.Screen
         name="Login"
@@ -102,7 +108,7 @@ export default function Routes() {
         name="Fund"
         component={Fund}
         options={{
-          headerTitle: headerTitleRedux,
+          headerTitle: `${headerTitleRedux} (${stockAbbreviation})`,
         }}
       />
 
