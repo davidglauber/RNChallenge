@@ -1,6 +1,6 @@
 import FeatherIcons from '@expo/vector-icons/Feather';
 import React, {ReactNode, useState} from 'react';
-import {Controller, useForm} from 'react-hook-form';
+import {Controller, useForm, useFormState} from 'react-hook-form';
 import {FlatList, KeyboardTypeOptions} from 'react-native';
 import {Checkbox} from 'react-native-paper';
 import {
@@ -9,6 +9,7 @@ import {
   FormCheckboxText,
   FormCheckboxView,
   FormContainerView,
+  FormErrorText,
   FormInput,
   FormInputView,
   FormLabel,
@@ -50,6 +51,22 @@ export default function Form({
     onSubmit(formData);
   };
 
+  const {errors}: any = useFormState({control});
+
+  const validateInput = (item: any, value: any) => {
+    if (item.label === 'Email') {
+      if (!/\S+@\S+\.\S+/.test(value)) {
+        return 'Enter a valid email address';
+      }
+    } else if (item.label === 'Password') {
+      if (value.length < 8) {
+        return 'Password must be at least 8 characters long';
+      }
+    }
+    // Se a validação passar, retorne vazio (sem erro)
+    return '';
+  };
+
   return (
     <FormContainerView showsVerticalScrollIndicator={false}>
       <FormTitle>{title}</FormTitle>
@@ -63,7 +80,10 @@ export default function Form({
               <Controller
                 name={item.label}
                 control={control}
-                rules={{required: true}}
+                rules={{
+                  required: true,
+                  validate: value => validateInput(item, value),
+                }}
                 render={({field}) => (
                   <FormInput
                     {...register(item.label)}
@@ -87,6 +107,10 @@ export default function Form({
                     <FeatherIcons name="eye-off" size={20} color="#A0A0A0" />
                   )}
                 </FormPasswordButton>
+              )}
+
+              {errors[item.label] && (
+                <FormErrorText>{errors[item.label].message}</FormErrorText>
               )}
             </FormInputView>
           );

@@ -57,6 +57,12 @@ export const FormInput = styled.TextInput`
   padding-vertical: ${RFValue(15)}px;
 `;
 
+export const FormErrorText = styled.Text`
+  font-family: Sora-Regular;
+  font-size: ${RFValue(10)}px;
+  color: red;
+`;
+
 export const FormButton = styled.TouchableOpacity`
   opacity: ${props => (props.disabled ? 0.5 : 1)};
   width: ${width}px;

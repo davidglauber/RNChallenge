@@ -11,6 +11,7 @@ import Trade from '../screens/Trade';
 
 import Portfolio from '../screens/Portfolio';
 import {RFValue} from 'react-native-responsive-fontsize';
+import Fund from '../screens/Fund';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -87,6 +88,14 @@ export default function Routes() {
         component={Register}
         options={{
           headerTitle: 'Register',
+        }}
+      />
+
+      <Stack.Screen
+        name="Fund"
+        component={Fund}
+        options={{
+          headerTitle: 'Generic Fund',
         }}
       />
 

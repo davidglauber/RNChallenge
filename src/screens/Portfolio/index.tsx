@@ -1,10 +1,6 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import {Container} from '../Login/style';
 
 export default function Portfolio() {
-  return (
-    <View>
-      <Text>Portfolio</Text>
-    </View>
-  );
+  return <Container />;
 }
