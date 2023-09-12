@@ -50,6 +50,7 @@ function MyTabs() {
               color={focused ? '#770FDF' : 'black'}
             />
           ),
+          headerShown: true,
         }}
       />
       <Tab.Screen
@@ -63,6 +64,7 @@ function MyTabs() {
               color={focused ? '#770FDF' : 'black'}
             />
           ),
+          headerShown: true,
         }}
       />
     </Tab.Navigator>

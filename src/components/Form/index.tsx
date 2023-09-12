@@ -51,20 +51,24 @@ export default function Form({
     onSubmit(formData);
   };
 
-  const {errors}: any = useFormState({control});
+  const {isDirty, errors}: any = useFormState({control});
 
-  const validateInput = (item: any, value: any) => {
-    if (item.label === 'Email') {
-      if (!/\S+@\S+\.\S+/.test(value)) {
-        return 'Enter a valid email address';
-      }
-    } else if (item.label === 'Password') {
-      if (value.length < 8) {
+  const validatePassword = (password: string) => {
+    if (isDirty) {
+      if (password.length < 8) {
         return 'Password must be at least 8 characters long';
       }
     }
-    // Se a validação passar, retorne vazio (sem erro)
-    return '';
+    return true;
+  };
+
+  const validateEmail = (email: string) => {
+    if (isDirty) {
+      if (!/\S+@\S+\.\S+/.test(email)) {
+        return 'Enter a valid email address';
+      }
+    }
+    return true;
   };
 
   return (
@@ -82,7 +86,14 @@ export default function Form({
                 control={control}
                 rules={{
                   required: true,
-                  validate: value => validateInput(item, value),
+                  validate: (value: string) => {
+                    if (item.label === 'Email') {
+                      return validateEmail(value);
+                    } else if (item.label === 'Password') {
+                      return validatePassword(value);
+                    }
+                    return true;
+                  },
                 }}
                 render={({field}) => (
                   <FormInput

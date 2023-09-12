@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {ReactNode} from 'react';
 import {FlatList} from 'react-native';
+import {calculateAppreciation} from '../../utils/CalculateAppreciation';
 import {
   FundInfoView,
   FundPriceText,
@@ -10,15 +11,25 @@ import {
   FundsContainer,
   FundsTitle,
 } from './styles';
-import {calculateAppreciation} from '../../utils/CalculateAppreciation';
 
 interface FundDetails {
   icon: ReactNode;
   chart: ReactNode;
   title: string;
-  price: string;
-  profitOrLoss: number;
   category: 'Solar' | 'Wind' | 'Natural';
+  stockPrice: number;
+  year: number;
+  appreciation: number;
+  lowerPrice: number;
+  higherPrice: number;
+  chartFull: ReactNode;
+  titleFund: string;
+  aum: string;
+  vintageRange: string;
+  closePrice: number;
+  openPrice: number;
+  ter: number;
+  issueDate: string;
 }
 interface FundsInterface {
   title: string;
@@ -39,15 +50,13 @@ export default function Funds({title, funds}: FundsInterface) {
           return (
             <FundsBoxButton onPress={() => navigate('Fund', {fund: item})}>
               {item.icon}
-
               <FundTitle>{item.title}</FundTitle>
-
               {item.chart}
 
               <FundInfoView>
-                <FundPriceText>${item.price}</FundPriceText>
+                <FundPriceText>${item.stockPrice}</FundPriceText>
                 <FundPriceVariationView>
-                  {calculateAppreciation(item.profitOrLoss)}
+                  {calculateAppreciation(item.appreciation)}
                 </FundPriceVariationView>
               </FundInfoView>
             </FundsBoxButton>
