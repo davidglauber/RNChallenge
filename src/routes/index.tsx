@@ -3,6 +3,7 @@ import FeatherIcons from '@expo/vector-icons/Feather';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+import {useSelector} from 'react-redux';
 
 import Home from '../screens/Home';
 import Login from '../screens/Login';
@@ -72,6 +73,10 @@ function MyTabs() {
 }
 
 export default function Routes() {
+  const headerTitleRedux = useSelector(
+    (state: any) => state.dinamicHeader?.headerTitle,
+  );
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -97,7 +102,7 @@ export default function Routes() {
         name="Fund"
         component={Fund}
         options={{
-          headerTitle: 'Generic Fund',
+          headerTitle: headerTitleRedux,
         }}
       />
 

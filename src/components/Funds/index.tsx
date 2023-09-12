@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {ReactNode} from 'react';
 import {FlatList} from 'react-native';
 import {calculateAppreciation} from '../../utils/CalculateAppreciation';
+import {useDispatch} from 'react-redux';
 import {
   FundInfoView,
   FundPriceText,
@@ -11,6 +12,7 @@ import {
   FundsContainer,
   FundsTitle,
 } from './styles';
+import {updateHeaderTitle} from '../../redux/reducers/dinamicHeaderReducer';
 
 interface FundDetails {
   icon: ReactNode;
@@ -38,6 +40,7 @@ interface FundsInterface {
 
 export default function Funds({title, funds}: FundsInterface) {
   const {navigate}: any = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <FundsContainer>
@@ -48,7 +51,11 @@ export default function Funds({title, funds}: FundsInterface) {
         showsHorizontalScrollIndicator={false}
         renderItem={({item}) => {
           return (
-            <FundsBoxButton onPress={() => navigate('Fund', {fund: item})}>
+            <FundsBoxButton
+              onPress={() => [
+                dispatch(updateHeaderTitle(item.title)),
+                navigate('Fund', {fund: item}),
+              ]}>
               {item.icon}
               <FundTitle>{item.title}</FundTitle>
               {item.chart}
