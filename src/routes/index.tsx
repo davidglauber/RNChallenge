@@ -3,7 +3,6 @@ import FeatherIcons from '@expo/vector-icons/Feather';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {RFValue} from 'react-native-responsive-fontsize';
 
 import Home from '../screens/Home';
 import Login from '../screens/Login';
@@ -11,6 +10,7 @@ import Register from '../screens/Register';
 import Trade from '../screens/Trade';
 
 import Portfolio from '../screens/Portfolio';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,9 +18,12 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: '#770FDF',
-        inactiveTintColor: '#000000',
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: '#770FDF',
+        tabBarInactiveTintColor: '#000000',
+        tabBarStyle: {height: RFValue(70)},
+        tabBarLabelStyle: {fontFamily: 'Sora-Bold', marginBottom: RFValue(10)},
       }}>
       <Tab.Screen
         name="Home"
@@ -33,7 +36,6 @@ function MyTabs() {
               color={focused ? '#770FDF' : 'black'}
             />
           ),
-          tabBarLabelStyle: {fontFamily: 'Sora-Bold'},
         }}
       />
       <Tab.Screen
@@ -47,7 +49,6 @@ function MyTabs() {
               color={focused ? '#770FDF' : 'black'}
             />
           ),
-          tabBarLabelStyle: {fontFamily: 'Sora-Bold'},
         }}
       />
       <Tab.Screen
@@ -61,7 +62,6 @@ function MyTabs() {
               color={focused ? '#770FDF' : 'black'}
             />
           ),
-          tabBarLabelStyle: {fontFamily: 'Sora-Bold'},
         }}
       />
     </Tab.Navigator>
@@ -69,17 +69,11 @@ function MyTabs() {
 }
 
 export default function Routes() {
-  // <Stack.Screen
-  //       name="Home"
-  //       component={Home}
-  //       options={{
-  //         headerShown: false,
-  //       }}
-  //     />
   return (
     <Stack.Navigator
       screenOptions={{
         gestureDirection: 'horizontal',
+        headerTitleStyle: {fontFamily: 'Sora-Regular'},
       }}>
       <Stack.Screen
         name="Login"

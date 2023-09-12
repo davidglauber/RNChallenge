@@ -17,7 +17,7 @@ export const LoginFooterTextUnderlined = styled.Text`
   text-decoration: underline;
 `;
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
 `;
