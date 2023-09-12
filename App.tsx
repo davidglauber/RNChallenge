@@ -8,9 +8,10 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Routes from './src/routes';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store/store';
+import {theme} from './src/utils/theme';
 
 function App(): JSX.Element {
-  useFonts({
+  const [fontsLoaded] = useFonts({
     'Sora-Bold': require('./assets/fonts/Sora-Bold.ttf'),
     'Sora-ExtraBold': require('./assets/fonts/Sora-ExtraBold.ttf'),
     'Sora-ExtraLight': require('./assets/fonts/Sora-ExtraLight.ttf'),
@@ -29,15 +30,13 @@ function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : '#ffffff',
+    backgroundColor: isDarkMode ? Colors.darker : theme.colors.white,
   };
 
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <PaperProvider>
-          <Routes />
-        </PaperProvider>
+        <PaperProvider>{fontsLoaded && <Routes />}</PaperProvider>
       </NavigationContainer>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}

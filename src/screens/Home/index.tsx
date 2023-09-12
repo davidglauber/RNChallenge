@@ -28,6 +28,7 @@ import {
   InformationCardTitle,
 } from './style';
 import {FundChartImage} from '../Fund/style';
+import {theme} from '../../utils/theme';
 
 const mockedArrayInformationCard = [
   {
@@ -68,10 +69,10 @@ function HomeHeader({
     <HomeContainerHeader>
       <HomeTopHeaderView>
         <HomeUserPicture>
-          <FeatherIcons name="user" size={20} color="#000000" />
+          <FeatherIcons name="user" size={20} color={theme.colors.black} />
         </HomeUserPicture>
         <HomeAccountBudgetText>Account: ${balance} ▾</HomeAccountBudgetText>
-        <FeatherIcons name="bell" size={20} color="#000000" />
+        <FeatherIcons name="bell" size={20} color={theme.colors.black} />
       </HomeTopHeaderView>
 
       <HomeBottomHeaderView>
@@ -80,12 +81,20 @@ function HomeHeader({
           <HomeMoneyOnAccountText>${portfolioValue}</HomeMoneyOnAccountText>
 
           <HomeProfitHeaderView>
-            <FeatherIcons name="arrow-up-right" size={12} color="#0FDF8F" />
+            <FeatherIcons
+              name="arrow-up-right"
+              size={12}
+              color={theme.colors.aquaGreen}
+            />
             <HomeProfitOrLossText>{profitOrLosses}%</HomeProfitOrLossText>
           </HomeProfitHeaderView>
 
           <HomeEarnRewardsHeader>
-            <FeatherIcons name="database" size={12} color="#770FDF" />
+            <FeatherIcons
+              name="database"
+              size={12}
+              color={theme.colors.darkViolet}
+            />
             <HomeEarnRewardsHeaderText>Earn Rewards</HomeEarnRewardsHeaderText>
           </HomeEarnRewardsHeader>
         </HomeInformationHeaderView>
@@ -116,7 +125,7 @@ function InformationCard({title}: InformationCardInterface) {
 
 export default function Home() {
   return (
-    <Container>
+    <Container showsVerticalScrollIndicator={false}>
       <HomeHeader
         balance="1,457.23"
         portfolioValue="1,245.23"
@@ -127,7 +136,13 @@ export default function Home() {
         title="Funds"
         funds={[
           {
-            icon: <FeatherIcons name="wind" size={16} color="#4A88D0" />,
+            icon: (
+              <FeatherIcons
+                name="wind"
+                size={16}
+                color={theme.colors.silkBlue}
+              />
+            ),
             category: 'Wind',
             title: 'Wind Fund',
             titleFund: 'Info & Stats',
@@ -154,7 +169,13 @@ export default function Home() {
             ),
           },
           {
-            icon: <FeatherIcons name="sun" size={16} color="#F0A719" />,
+            icon: (
+              <FeatherIcons
+                name="sun"
+                size={16}
+                color={theme.colors.beeYellow}
+              />
+            ),
             category: 'Solar',
             title: 'Solar Fund',
             titleFund: 'Info & Stats',
@@ -181,7 +202,13 @@ export default function Home() {
             ),
           },
           {
-            icon: <FeatherIcons name="feather" size={16} color="#0FDF8F" />,
+            icon: (
+              <FeatherIcons
+                name="feather"
+                size={16}
+                color={theme.colors.aquaGreen}
+              />
+            ),
             category: 'Natural',
             title: 'Natural Fund',
             titleFund: 'Info & Stats',
@@ -218,7 +245,7 @@ export default function Home() {
             source={require('../../assets/images/bannerImage.png')}
           />
         }
-        colorBackground="#770FDF"
+        colorBackground={theme.colors.darkViolet}
       />
 
       <HomeInformationCardList

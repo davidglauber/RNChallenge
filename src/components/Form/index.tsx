@@ -17,6 +17,7 @@ import {
   FormTitle,
   FormTitleButton,
 } from './style';
+import {theme} from '../../utils/theme';
 
 interface InputsInterface {
   label: string;
@@ -104,7 +105,7 @@ export default function Form({
                     keyboardType={item.type}
                     secureTextEntry={showPassword}
                     autoCapitalize="none"
-                    placeholderTextColor="#CFCFCF"
+                    placeholderTextColor={theme.colors.greyGoose}
                   />
                 )}
               />
@@ -113,9 +114,17 @@ export default function Form({
                 <FormPasswordButton
                   onPress={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
-                    <FeatherIcons name="eye" size={20} color="#A0A0A0" />
+                    <FeatherIcons
+                      name="eye"
+                      size={20}
+                      color={theme.colors.starDust}
+                    />
                   ) : (
-                    <FeatherIcons name="eye-off" size={20} color="#A0A0A0" />
+                    <FeatherIcons
+                      name="eye-off"
+                      size={20}
+                      color={theme.colors.starDust}
+                    />
                   )}
                 </FormPasswordButton>
               )}

@@ -3,6 +3,7 @@ import React from 'react';
 import {ColorValue, TouchableOpacity} from 'react-native';
 import {TitleButton} from './style';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {theme} from '../../utils/theme';
 
 interface ButtonInterface {
   title: string;
@@ -32,7 +33,7 @@ export default function Button({
         alignItems: 'center',
         alignSelf: selfAlign ? 'center' : 'auto',
         borderWidth: hasBorder ? 1 : 0,
-        borderColor: hasBorder ? '#CFCFCF' : 'transparent',
+        borderColor: hasBorder ? theme.colors.greyGoose : 'transparent',
         borderRadius: RFValue(4),
       }}>
       <TitleButton style={{color: titleColor}}>{title}</TitleButton>

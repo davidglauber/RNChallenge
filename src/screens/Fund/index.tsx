@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import FeatherIcons from '@expo/vector-icons/Feather';
 import {useRoute} from '@react-navigation/native';
 import React, {ReactNode, useState} from 'react';
@@ -12,6 +11,10 @@ import {
   FooterFundText,
   FooterFundView,
   FundAppreciationView,
+  FundBreakdownLogo,
+  FundBreakdownNewsImage,
+  FundBreakdownShortDescription,
+  FundBreakdownView,
   FundChartPeriodText,
   FundChartPeriodView,
   FundChartPriceText,
@@ -30,9 +33,11 @@ import {
   FundSummaryCreditView,
   FundSummaryRowAligned,
   FundSummaryTitleView,
+  FundsBreakdownNewsView,
   FundsStatsColumn,
   Row,
 } from './style';
+import {theme} from '../../utils/theme';
 
 const chartPeriod = [
   {
@@ -58,6 +63,41 @@ const chartPeriod = [
   {
     type: 'all',
     title: 'All',
+  },
+];
+
+const newsBreakdown = [
+  {
+    logo: (
+      <FundBreakdownLogo
+        resizeMode="contain"
+        source={require('../../assets/images/logoNews.png')}
+      />
+    ),
+    newsImage: (
+      <FundBreakdownNewsImage
+        resizeMode="cover"
+        source={require('../../assets/images/newsImage.png')}
+      />
+    ),
+    shortDescription:
+      'Aspira is building a modular, direct air capture system with the energy supply integrated into the modules.',
+  },
+  {
+    logo: (
+      <FundBreakdownLogo
+        resizeMode="contain"
+        source={require('../../assets/images/logoNews2.png')}
+      />
+    ),
+    newsImage: (
+      <FundBreakdownNewsImage
+        resizeMode="cover"
+        source={require('../../assets/images/newsImage2.png')}
+      />
+    ),
+    shortDescription:
+      'They uses renewable geothermal energy and waste heat to capture CO₂ directly from the air.',
   },
 ];
 
@@ -89,6 +129,16 @@ interface FundSummaryInterface
   warningMessage?: string;
 }
 
+interface NewsInterface {
+  newsImage: ReactNode;
+  logo: ReactNode;
+  shortDescription: string;
+}
+interface FundBreakdownInterface {
+  title: string;
+  news: NewsInterface[];
+}
+
 function ChartFund({
   higherPrice,
   lowerPrice,
@@ -114,12 +164,17 @@ function ChartFund({
           <FundChartPeriodView
             style={{
               backgroundColor:
-                activePeriod === item.type ? '#f7efff' : '#ffffff',
+                activePeriod === item.type
+                  ? theme.colors.titanWhite
+                  : theme.colors.white,
             }}
             onPress={() => handlePeriodClick(item.type)}>
             <FundChartPeriodText
               style={{
-                color: activePeriod === item.type ? '#770fdf' : '#A0A0A0',
+                color:
+                  activePeriod === item.type
+                    ? theme.colors.darkViolet
+                    : theme.colors.starDust,
               }}>
               {item.title}
             </FundChartPeriodText>
@@ -233,7 +288,7 @@ function FundSummary({
   return (
     <FundSummaryContainer>
       <FundSummaryTitleView>
-        <FeatherIcons name="briefcase" size={24} color="#000000" />
+        <FeatherIcons name="briefcase" size={24} color={theme.colors.black} />
         <FundStatsTitle style={{marginLeft: RFValue(5)}}>
           {title}
         </FundStatsTitle>
@@ -252,20 +307,20 @@ function FundSummary({
       <FundSummaryButtonsActionView>
         <Button
           title="Sell"
-          color="#ffffff"
+          color={theme.colors.white}
           hasBorder={true}
           width={RFValue(143)}
           height={RFValue(47)}
-          titleColor="#770FDF"
+          titleColor={theme.colors.darkViolet}
         />
 
         <Button
           title="Retire credits"
-          color="#0FDF8F"
+          color={theme.colors.aquaGreen}
           hasBorder={false}
           width={RFValue(143)}
           height={RFValue(47)}
-          titleColor="#FFFFFF"
+          titleColor={theme.colors.white}
         />
       </FundSummaryButtonsActionView>
 
@@ -277,14 +332,37 @@ function FundSummary({
 
       <Button
         title="Buy"
-        color="#770FDF"
+        color={theme.colors.darkViolet}
         hasBorder={false}
         selfAlign
         width={RFValue(250)}
         height={RFValue(47)}
-        titleColor="#ffffff"
+        titleColor={theme.colors.white}
       />
     </FundSummaryContainer>
+  );
+}
+
+function FundBreakdown({title, news}: FundBreakdownInterface) {
+  return (
+    <FundBreakdownView>
+      <FundStatsTitle>{title}</FundStatsTitle>
+
+      <FlatList
+        data={news}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({item}) => (
+          <FundsBreakdownNewsView>
+            {item.newsImage}
+            {item.logo}
+            <FundBreakdownShortDescription>
+              {item.shortDescription}
+            </FundBreakdownShortDescription>
+          </FundsBreakdownNewsView>
+        )}
+      />
+    </FundBreakdownView>
   );
 }
 
@@ -312,6 +390,8 @@ export default function Fund() {
         closePrice={fundParam.closePrice}
         aum={fundParam.aum}
       />
+
+      <FundBreakdown title="Fund Breakdown" news={newsBreakdown} />
 
       <FundSummary
         title="Your Portfolio"

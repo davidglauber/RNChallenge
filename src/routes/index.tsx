@@ -13,6 +13,7 @@ import Trade from '../screens/Trade';
 import Portfolio from '../screens/Portfolio';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Fund from '../screens/Fund';
+import {theme} from '../utils/theme';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,8 +23,8 @@ function MyTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#770FDF',
-        tabBarInactiveTintColor: '#000000',
+        tabBarActiveTintColor: theme.colors.darkViolet,
+        tabBarInactiveTintColor: theme.colors.black,
         tabBarStyle: {height: RFValue(70)},
         tabBarLabelStyle: {fontFamily: 'Sora-Bold', marginBottom: RFValue(10)},
       }}>
@@ -35,7 +36,7 @@ function MyTabs() {
             <FeatherIcons
               name="home"
               size={24}
-              color={focused ? '#770FDF' : 'black'}
+              color={focused ? theme.colors.darkViolet : 'black'}
             />
           ),
         }}
@@ -48,7 +49,7 @@ function MyTabs() {
             <FeatherIcons
               name="trending-up"
               size={24}
-              color={focused ? '#770FDF' : 'black'}
+              color={focused ? theme.colors.darkViolet : 'black'}
             />
           ),
           headerShown: true,
@@ -62,7 +63,7 @@ function MyTabs() {
             <FeatherIcons
               name="briefcase"
               size={24}
-              color={focused ? '#770FDF' : 'black'}
+              color={focused ? theme.colors.darkViolet : 'black'}
             />
           ),
           headerShown: true,

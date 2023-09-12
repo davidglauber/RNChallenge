@@ -1,11 +1,12 @@
 import {FlatList} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
+import {theme} from '../../utils/theme';
 
 export const HomeContainerHeader = styled.View`
   padding: ${RFValue(20)}px;
   border-bottom-width: 1px;
-  border-color: #f4f4f4;
+  border-color: ${theme.colors.whiteSmoke};
 `;
 export const HomeTopHeaderView = styled.View`
   flex-direction: row;
@@ -19,7 +20,7 @@ export const HomeEarnRewardsHeader = styled.TouchableOpacity`
   width: ${RFValue(110)}px;
   height: ${RFValue(30)}px;
   flex-direction: row;
-  background-color: #f7efff;
+  background-color: ${theme.colors.titanWhite};
   border-radius: ${RFValue(4)}px;
   justify-content: center;
   align-items: center;
@@ -66,7 +67,7 @@ export const BannerTitle = styled.Text`
   font-family: Sora-Bold;
   font-size: ${RFValue(16)}px;
   max-width: ${RFValue(150)}px;
-  color: #ffffff;
+  color: ${theme.colors.white};
 `;
 
 export const BannerDescription = styled.Text`
@@ -74,7 +75,7 @@ export const BannerDescription = styled.Text`
   font-size: ${RFValue(12)}px;
   margin-top: ${RFValue(10)}px;
   max-width: ${RFValue(150)}px;
-  color: #ffffff;
+  color: ${theme.colors.white};
 `;
 
 export const HomeProfitHeaderView = styled.View`
@@ -92,11 +93,11 @@ export const InformationCardContainer = styled.TouchableOpacity`
   border-radius: ${RFValue(10)}px;
   width: ${RFValue(139)}px;
   height: ${RFValue(215)}px;
-  background-color: #f4f4f4;
+  background-color: ${theme.colors.whiteSmoke};
 `;
 
 export const HomeUserPicture = styled.View`
-  background-color: #f4f4f4;
+  background-color: ${theme.colors.whiteSmoke};
   justify-content: center;
   align-items: center;
   width: ${RFValue(32)}px;
@@ -107,36 +108,36 @@ export const HomeUserPicture = styled.View`
 export const HomeAccountBudgetText = styled.Text`
   font-family: Sora-Bold;
   font-size: ${RFValue(14)}px;
-  color: #000000;
+  color: ${theme.colors.black};
 `;
 
 export const InformationCardTitle = styled.Text`
   font-family: Sora-Bold;
   font-size: ${RFValue(12)}px;
-  color: #000000;
+  color: ${theme.colors.black};
 `;
 
 export const HomeMoneyOnAccountText = styled.Text`
   font-family: Sora-Bold;
   font-size: ${RFValue(24)}px;
-  color: #000000;
+  color: ${theme.colors.black};
 `;
 
 export const HomeEarnRewardsHeaderText = styled.Text`
   font-family: Sora-Bold;
   font-size: ${RFValue(10)}px;
   margin-left: ${RFValue(5)}px;
-  color: #770fdf;
+  color: ${theme.colors.darkViolet};
 `;
 
 export const HomeSubtitleHeader = styled.Text`
   font-family: Sora-Regular;
   font-size: ${RFValue(12)}px;
-  color: #000000;
+  color: ${theme.colors.black};
 `;
 
 export const HomeProfitOrLossText = styled.Text`
   font-family: Sora-Light;
   font-size: ${RFValue(12)}px;
-  color: #0fdf8f;
+  color: ${theme.colors.aquaGreen};
 `;

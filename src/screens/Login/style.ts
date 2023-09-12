@@ -1,5 +1,6 @@
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
+import {theme} from '../../utils/theme';
 
 export const LoginFooterButton = styled.TouchableOpacity`
   flex-direction: row;
@@ -19,5 +20,5 @@ export const LoginFooterTextUnderlined = styled.Text`
 
 export const Container = styled.ScrollView`
   flex: 1;
-  background-color: #ffffff;
+  background-color: ${theme.colors.white};
 `;

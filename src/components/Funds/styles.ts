@@ -1,5 +1,6 @@
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
+import {theme} from '../../utils/theme';
 
 export const FundsContainer = styled.View`
   padding: ${RFValue(20)}px;
@@ -21,32 +22,33 @@ export const FundsBoxButton = styled.TouchableOpacity`
   padding: ${RFValue(10)}px;
   margin-right: ${RFValue(15)}px;
   border-width: ${RFValue(1)}px;
-  border-color: #e6e6e6;
+  border-color: ${theme.colors.mercury};
   border-radius: ${RFValue(4)}px;
 `;
 
 export const FundsTitle = styled.Text`
   font-family: Sora-Bold;
-  color: #000000;
+  color: ${theme.colors.black};
   font-size: ${RFValue(18)}px;
   margin-bottom: ${RFValue(20)}px;
 `;
 
 export const FundPriceText = styled.Text`
   font-family: Sora-Regular;
-  color: #000000;
+  color: ${theme.colors.black};
   font-size: ${RFValue(14)}px;
 `;
 
 export const FundPriceVariationText = styled.Text`
   font-family: Sora-Regular;
-  color: ${props => (props.disabled ? '#0FDF8F' : '#EE8688')};
+  color: ${props =>
+    props.disabled ? theme.colors.aquaGreen : theme.colors.lightCoral};
   font-size: ${RFValue(12)}px;
 `;
 
 export const FundTitle = styled.Text`
   font-family: Sora-Bold;
-  color: #000000;
+  color: ${theme.colors.black};
   font-size: ${RFValue(12)}px;
   margin-left: ${RFValue(2)}px;
 `;

@@ -1,6 +1,7 @@
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 import {width} from '../../utils/Dimensions';
+import {theme} from '../../utils/theme';
 
 export const FundHeader = styled.View`
   padding: ${RFValue(20)}px;
@@ -30,32 +31,32 @@ export const FundChartPriceTextHigh = styled.Text`
   top: ${RFValue(-25)}px;
   font-size: ${RFValue(14)}px;
   font-family: Sora-Regular;
-  color: #a0a0a0;
+  color: ${theme.colors.starDust};
 `;
 
 export const FundChartPriceText = styled.Text`
   font-size: ${RFValue(14)}px;
   font-family: Sora-Regular;
-  color: #a0a0a0;
+  color: ${theme.colors.starDust};
 `;
 
 export const FundChartPriceTextInfo = styled.Text`
   font-size: ${RFValue(14)}px;
   font-family: Sora-Regular;
-  color: #000000;
+  color: ${theme.colors.black};
 `;
 
 export const FundChartWarningText = styled.Text`
   font-size: ${RFValue(10)}px;
   margin-top: ${RFValue(15)}px;
   font-family: Sora-Light;
-  color: #a0a0a0;
+  color: ${theme.colors.starDust};
 `;
 
 export const FooterFundText = styled.Text`
   font-size: ${RFValue(12)}px;
   font-family: Sora-Light;
-  color: #a0a0a0;
+  color: ${theme.colors.starDust};
 `;
 
 export const FundChartPriceTextLow = styled.Text`
@@ -64,11 +65,11 @@ export const FundChartPriceTextLow = styled.Text`
   top: ${RFValue(155)}px;
   font-size: ${RFValue(14)}px;
   font-family: Sora-Regular;
-  color: #a0a0a0;
+  color: ${theme.colors.starDust};
 `;
 
 export const FundChartPeriodView = styled.TouchableOpacity`
-  background-color: #f7efff;
+  background-color: ${theme.colors.titanWhite};
   margin-top: ${RFValue(38)}px;
   border-radius: ${RFValue(4)}px;
   margin-horizontal: ${RFValue(15)}px;
@@ -79,7 +80,7 @@ export const FundChartPeriodView = styled.TouchableOpacity`
 `;
 
 export const FundChartPeriodText = styled.Text`
-  color: #770fdf;
+  color: ${theme.colors.darkViolet};
   font-family: Sora-Regular;
   font-size: ${RFValue(15)}px;
 `;
@@ -89,7 +90,7 @@ export const FundStatsView = styled.View`
 `;
 
 export const FooterFundView = styled.View`
-  background-color: #f4f4f4;
+  background-color: ${theme.colors.whiteSmoke};
   width: ${RFValue(300)}px;
   margin-vertical: ${RFValue(40)}px;
   border-radius: ${RFValue(4)}px;
@@ -99,12 +100,46 @@ export const FooterFundView = styled.View`
 export const FundStatsTitle = styled.Text`
   font-family: Sora-Bold;
   font-size: ${RFValue(17)}px;
-  color: #000000;
+  margin-bottom: ${RFValue(18)}px;
+  color: ${theme.colors.black};
+`;
+
+export const FundBreakdownView = styled.View`
+  margin: ${RFValue(20)}px;
+`;
+
+export const FundsBreakdownNewsView = styled.View`
+  width: ${RFValue(200)}px;
+  background-color: ${theme.colors.white};
+  padding: ${RFValue(10)}px;
+  margin-right: ${RFValue(10)}px;
+  border-width: ${RFValue(1)}px;
+  border-color: ${theme.colors.whiteSmoke};
+  border-radius: ${RFValue(4)}px;
+`;
+
+export const FundBreakdownShortDescription = styled.Text`
+  font-family: Sora-Regular;
+  font-size: ${RFValue(12)}px;
+  color: ${theme.colors.black};
 `;
 
 export const FundStatsDetailsView = styled.View`
   flex-direction: row;
   margin-top: ${RFValue(20)}px;
+`;
+
+export const FundBreakdownLogo = styled.Image`
+  height: ${RFValue(20)}px;
+  align-self: center;
+  margin-vertical: ${RFValue(11)}px;
+`;
+
+export const FundBreakdownNewsImage = styled.Image`
+  width: ${RFValue(200)}px;
+  height: ${RFValue(100)}px;
+  margin-top: ${RFValue(-12)}px;
+  align-self: center;
 `;
 
 export const FundSummaryCreditView = styled.View`
