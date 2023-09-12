@@ -1,13 +1,22 @@
 import FeatherIcons from '@expo/vector-icons/Feather';
-import React from 'react';
+import React, {ReactNode} from 'react';
+import {ColorValue} from 'react-native';
 
+import Funds from '../../components/Funds';
 import {Container} from '../Login/style';
 import {
+  BannerColumnView,
+  BannerContainer,
+  BannerDescription,
+  BannerTitle,
   HomeAccountBudgetText,
+  HomeBannerImage,
   HomeBottomHeaderView,
+  HomeChartImage,
   HomeContainerHeader,
   HomeEarnRewardsHeader,
   HomeEarnRewardsHeaderText,
+  HomeInformationCardList,
   HomeInformationHeaderView,
   HomeMoneyOnAccountText,
   HomeProfitHeaderView,
@@ -15,12 +24,38 @@ import {
   HomeSubtitleHeader,
   HomeTopHeaderView,
   HomeUserPicture,
+  InformationCardContainer,
+  InformationCardTitle,
 } from './style';
 
+const mockedArrayInformationCard = [
+  {
+    id: 0,
+    title: 'Why should you invest here?',
+  },
+  {
+    id: 1,
+    title: 'When we need to buy cryptos?',
+  },
+  {
+    id: 2,
+    title: 'How much do we need to rest?',
+  },
+];
 interface HeaderInterface {
   balance: string;
   profitOrLosses: number;
   portfolioValue: string;
+}
+
+interface BannerInterface {
+  title: string;
+  description: string;
+  image: ReactNode | string;
+  colorBackground: ColorValue;
+}
+interface InformationCardInterface {
+  title: string;
 }
 
 function HomeHeader({
@@ -57,6 +92,27 @@ function HomeHeader({
     </HomeContainerHeader>
   );
 }
+
+function Banner({title, description, image, colorBackground}: BannerInterface) {
+  return (
+    <BannerContainer style={{backgroundColor: colorBackground}}>
+      <BannerColumnView>
+        <BannerTitle>{title}</BannerTitle>
+        <BannerDescription>{description}</BannerDescription>
+      </BannerColumnView>
+      {image}
+    </BannerContainer>
+  );
+}
+
+function InformationCard({title}: InformationCardInterface) {
+  return (
+    <InformationCardContainer>
+      <InformationCardTitle>{title}</InformationCardTitle>
+    </InformationCardContainer>
+  );
+}
+
 export default function Home() {
   return (
     <Container>
@@ -64,6 +120,65 @@ export default function Home() {
         balance="1,457.23"
         portfolioValue="1,245.23"
         profitOrLosses={31.82}
+      />
+
+      <Funds
+        title="Funds"
+        funds={[
+          {
+            icon: <FeatherIcons name="wind" size={16} color="#4A88D0" />,
+            category: 'Wind',
+            title: 'Wind Fund',
+            chart: (
+              <HomeChartImage
+                source={require('../../assets/images/chartWind.png')}
+              />
+            ),
+            price: '1032.23',
+            profitOrLoss: 3.51,
+          },
+          {
+            icon: <FeatherIcons name="sun" size={16} color="#F0A719" />,
+            category: 'Solar',
+            title: 'Solar Fund',
+            chart: (
+              <HomeChartImage
+                source={require('../../assets/images/chartSolar.png')}
+              />
+            ),
+            price: '986.61',
+            profitOrLoss: 0.13,
+          },
+          {
+            icon: <FeatherIcons name="feather" size={16} color="#0FDF8F" />,
+            category: 'Natural',
+            title: 'Natural Fund',
+            chart: (
+              <HomeChartImage
+                source={require('../../assets/images/chartWind.png')}
+              />
+            ),
+            price: '1122.95',
+            profitOrLoss: 2.15,
+          },
+        ]}
+      />
+
+      <Banner
+        title="Learn more about carbon credits"
+        description="Check out our top tips!"
+        image={
+          <HomeBannerImage
+            source={require('../../assets/images/bannerImage.png')}
+          />
+        }
+        colorBackground="#770FDF"
+      />
+
+      <HomeInformationCardList
+        data={mockedArrayInformationCard}
+        numColumns={2}
+        renderItem={({item}: any) => <InformationCard title={item.title} />}
       />
     </Container>
   );
