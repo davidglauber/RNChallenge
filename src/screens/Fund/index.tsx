@@ -1,10 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
+import FeatherIcons from '@expo/vector-icons/Feather';
 import React, {ReactNode, useState} from 'react';
 import {FlatList, View} from 'react-native';
+import {RFValue} from 'react-native-responsive-fontsize';
+import Button from '../../components/Button';
 import {calculateAppreciation} from '../../utils/CalculateAppreciation';
 import {HomeMoneyOnAccountText} from '../Home/style';
 import {Container} from '../Login/style';
 import {
+  FooterFundText,
+  FooterFundView,
   FundAppreciationView,
   FundChartImage,
   FundChartPeriodText,
@@ -14,12 +19,19 @@ import {
   FundChartPriceTextInfo,
   FundChartPriceTextLow,
   FundChartView,
+  FundChartWarningText,
   FundHeader,
   FundStatsDetailsView,
   FundStatsInformationView,
   FundStatsTitle,
   FundStatsView,
+  FundSummaryButtonsActionView,
+  FundSummaryContainer,
+  FundSummaryCreditView,
+  FundSummaryRowAligned,
+  FundSummaryTitleView,
   FundsStatsColumn,
+  Row,
 } from './style';
 
 const chartPeriod = [
@@ -49,7 +61,7 @@ const chartPeriod = [
   },
 ];
 
-interface SummaryInterface {
+interface DashboardInterface {
   stockPrice: number;
   year: number;
   appreciation: number;
@@ -68,12 +80,21 @@ interface StatsInterface {
   issueDate: string;
 }
 
+interface FundSummaryInterface
+  extends Pick<DashboardInterface, 'appreciation'>,
+    Pick<StatsInterface, 'title'> {
+  credits: number;
+  price: string;
+  lastPurchase: string;
+  warningMessage?: string;
+}
+
 function ChartFund({
   higherPrice,
   lowerPrice,
   chart,
-}: Omit<SummaryInterface, 'stockPrice' | 'year' | 'appreciation'>) {
-  const [activePeriod, setActivePeriod] = useState('1d');
+}: Omit<DashboardInterface, 'stockPrice' | 'year' | 'appreciation'>) {
+  const [activePeriod, setActivePeriod] = useState('day');
 
   const handlePeriodClick = (type: string) => {
     setActivePeriod(type);
@@ -109,14 +130,14 @@ function ChartFund({
   );
 }
 
-function SummaryFund({
+function DashboardFund({
   stockPrice,
   appreciation,
   higherPrice,
   lowerPrice,
   year,
   chart,
-}: SummaryInterface) {
+}: DashboardInterface) {
   return (
     <View>
       <FundHeader>
@@ -188,10 +209,89 @@ function StatsFund({
   );
 }
 
+function FooterFund() {
+  return (
+    <FooterFundView>
+      <FooterFundText>
+        Please note that prices are for reference only and may vary at the time
+        of excecuting a buy or sell order.{'\n\n'} The information provided is
+        not investment advice, and should not be used as a recommendation to buy
+        or sell assets.
+      </FooterFundText>
+    </FooterFundView>
+  );
+}
+
+function FundSummary({
+  credits,
+  price,
+  appreciation,
+  lastPurchase,
+  title,
+  warningMessage,
+}: FundSummaryInterface) {
+  return (
+    <FundSummaryContainer>
+      <FundSummaryTitleView>
+        <FeatherIcons name="briefcase" size={24} color="#000000" />
+        <FundStatsTitle style={{marginLeft: RFValue(5)}}>
+          {title}
+        </FundStatsTitle>
+      </FundSummaryTitleView>
+
+      <FundSummaryCreditView>
+        <HomeMoneyOnAccountText>{credits} credits</HomeMoneyOnAccountText>
+        <HomeMoneyOnAccountText>${price}</HomeMoneyOnAccountText>
+      </FundSummaryCreditView>
+
+      <FundSummaryRowAligned>
+        <Row>{calculateAppreciation(appreciation)}</Row>
+        <FundChartPriceText>Last purchase {lastPurchase}</FundChartPriceText>
+      </FundSummaryRowAligned>
+
+      <FundSummaryButtonsActionView>
+        <Button
+          title="Sell"
+          color="#ffffff"
+          hasBorder={true}
+          width={RFValue(143)}
+          height={RFValue(47)}
+          titleColor="#770FDF"
+        />
+
+        <Button
+          title="Retire credits"
+          color="#0FDF8F"
+          hasBorder={false}
+          width={RFValue(143)}
+          height={RFValue(47)}
+          titleColor="#FFFFFF"
+        />
+      </FundSummaryButtonsActionView>
+
+      {warningMessage && (
+        <FundChartWarningText>{warningMessage}</FundChartWarningText>
+      )}
+
+      <FooterFund />
+
+      <Button
+        title="Buy"
+        color="#770FDF"
+        hasBorder={false}
+        selfAlign
+        width={RFValue(250)}
+        height={RFValue(47)}
+        titleColor="#ffffff"
+      />
+    </FundSummaryContainer>
+  );
+}
+
 export default function Fund() {
   return (
-    <Container>
-      <SummaryFund
+    <Container showsVerticalScrollIndicator={false}>
+      <DashboardFund
         appreciation={10.35}
         higherPrice={15.5}
         lowerPrice={9.05}
@@ -212,6 +312,15 @@ export default function Fund() {
         openPrice={17.74}
         closePrice={17.68}
         aum="430.88"
+      />
+
+      <FundSummary
+        title="Your Portfolio"
+        credits={18}
+        lastPurchase="28d ago"
+        price="328.14"
+        warningMessage="You’ve previously retired 28 credits of this asset"
+        appreciation={8.41}
       />
     </Container>
   );

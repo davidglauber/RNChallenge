@@ -3,8 +3,8 @@ import {StatusBar, useColorScheme} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {useFonts} from 'expo-font';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {PaperProvider} from 'react-native-paper';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Routes from './src/routes';
 
 function App(): JSX.Element {

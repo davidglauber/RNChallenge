@@ -45,6 +45,19 @@ export const FundChartPriceTextInfo = styled.Text`
   color: #000000;
 `;
 
+export const FundChartWarningText = styled.Text`
+  font-size: ${RFValue(10)}px;
+  margin-top: ${RFValue(15)}px;
+  font-family: Sora-Light;
+  color: #a0a0a0;
+`;
+
+export const FooterFundText = styled.Text`
+  font-size: ${RFValue(12)}px;
+  font-family: Sora-Light;
+  color: #a0a0a0;
+`;
+
 export const FundChartPriceTextLow = styled.Text`
   position: absolute;
   left: ${RFValue(25)}px;
@@ -75,6 +88,14 @@ export const FundStatsView = styled.View`
   margin-horizontal: ${RFValue(20)}px;
 `;
 
+export const FooterFundView = styled.View`
+  background-color: #f4f4f4;
+  width: ${RFValue(300)}px;
+  margin-vertical: ${RFValue(40)}px;
+  border-radius: ${RFValue(4)}px;
+  padding: ${RFValue(10)}px;
+`;
+
 export const FundStatsTitle = styled.Text`
   font-family: Sora-Bold;
   font-size: ${RFValue(17)}px;
@@ -83,8 +104,28 @@ export const FundStatsTitle = styled.Text`
 
 export const FundStatsDetailsView = styled.View`
   flex-direction: row;
-  flex-wrap: wrap;
-  width: ${RFValue(350)}px;
+  margin-top: ${RFValue(20)}px;
+`;
+
+export const FundSummaryCreditView = styled.View`
+  margin-top: ${RFValue(19)}px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const FundSummaryRowAligned = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const FundSummaryButtonsActionView = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
   margin-top: ${RFValue(20)}px;
 `;
 
@@ -94,4 +135,13 @@ export const FundsStatsColumn = styled.View`
 `;
 export const FundStatsInformationView = styled.View`
   margin-bottom: ${RFValue(10)}px;
+`;
+export const FundSummaryContainer = styled.View`
+  margin: ${RFValue(20)}px;
+  margin-top: ${RFValue(50)}px;
+`;
+
+export const FundSummaryTitleView = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
