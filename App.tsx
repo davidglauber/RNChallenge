@@ -9,8 +9,11 @@ import Routes from './src/routes';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store/store';
 import {theme} from './src/utils/theme';
+import {hideVirtualizedListWarning} from './src/utils/HideVirtualizedListWarning';
 
 function App(): JSX.Element {
+  hideVirtualizedListWarning();
+
   const [fontsLoaded] = useFonts({
     'Sora-Bold': require('./assets/fonts/Sora-Bold.ttf'),
     'Sora-ExtraBold': require('./assets/fonts/Sora-ExtraBold.ttf'),
