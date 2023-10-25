@@ -1,9 +1,7 @@
 
 # RNChallenge by Crowdform 📶
 
-Hello everyone, everything good? 
-
-I would like to say that I really enjoyed your challenge, in the time given I assure you that I did my best in this test, I look forward to a possible interview 😀
+Hello everyone, everything good?
 
 
 ## Running the app
